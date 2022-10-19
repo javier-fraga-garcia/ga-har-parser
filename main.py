@@ -31,9 +31,8 @@ def main():
 
     logger.info('Se han detectado {} requests provenientes de GA para la versión {}'.format(len(ga_entries), version))
 
-    res = []
-    for entrie in ga_entries:
-        res.append(entrie['request']['headers'][2]['value'])
+    res = list(map(lambda entrie: entrie['request']['headers'][2]['value'], ga_entries))
+
     with open(res_file, 'w') as f:
         f.writelines(['{}\n'.format(req) for req in res])
 
